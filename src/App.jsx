@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Counter from "./Counter.jsx";
+import Todo from "./Todo.jsx";
+import Popup from "./Popup.jsx";
+import AddArray from "./AddArray.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
+  const [popupOpen, setPopupOpen] = useState(false); // ✅ ADD THIS
 
   return (
     <>
+
+      <AddArray />
+      <Counter />
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>To Do Title</h1>
+
+        {/* Text Input */}
+        <input
+          type="text"
+          onChange={(event) => {
+            console.log(event.target.value);
+          }}
+        />
+
+        {/* Button to open popup */}
+        <button onClick={() => setPopupOpen(true)}>Add to do</button>
+
+        {/* Todo Items */}
+        <Todo task="Learn React"  description="Learn the basics of React including components, state, and props." />
+        <Todo task="Finish ASAP Frontend" description="Complete the frontend tasks as soon as possible." />
+        <Todo task="Land a junior job" description="Secure a junior developer position to gain professional experience."/>
+        <Todo task="Earn 100k+" description="Aim to earn a six-figure salary through skill development and job opportunities." />
+
+        {/* Conditional popup */}
+        {popupOpen && 
+          <Popup
+            title="Are you 10000000% sure?"
+            onConfirm={() => setPopupOpen(false)}
+            onCancel={() => setPopupOpen(false)}
+          />
+        }
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
