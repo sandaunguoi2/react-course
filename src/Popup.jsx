@@ -1,6 +1,6 @@
 function Popup({ title, onConfirm, onCancel }) {
   return (
-    <div className="popup-overlay">
+    <div className="popup-overlay" onClick={onCancel}>
       <div className="popup-box">
         <h2>{title}</h2>
 
@@ -14,6 +14,7 @@ function Popup({ title, onConfirm, onCancel }) {
           </button>
         </div>
       </div>
+    
     </div>
   );
 }
